@@ -17,6 +17,19 @@
 
 ## Quick Start
 
+### 📥 프로젝트 받기
+
+**개발자용 (Git 사용)**
+```bash
+git clone https://github.com/Akisigure/bithumb_ssalmuk.git
+cd bithumb_ssalmuk
+```
+
+**비개발자용 (ZIP 다운로드)**
+1. GitHub 페이지에서 `Code` 버튼 클릭
+2. `Download ZIP` 선택
+3. 압축 해제 후 폴더로 이동
+
 ### GUI 버전 (추천) 🎨
 
 ```bash
