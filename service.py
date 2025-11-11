@@ -5,12 +5,16 @@ import requests
 import json
 from collections import defaultdict
 
-# 환경 변수 로드
-load_dotenv()
-
-ACCESS_KEY = os.getenv("ACCESS_KEY")
-SECRET_KEY = os.getenv("SECRET_KEY")
 API_URL = "https://api.bithumb.com"
+
+
+def get_api_keys():
+    """
+    API 키를 동적으로 로드
+    .env 파일이 변경되어도 재시작 없이 바로 반영됨
+    """
+    load_dotenv(override=True)  # 매번 최신 값으로 로드
+    return os.getenv("ACCESS_KEY"), os.getenv("SECRET_KEY")
 
 
 # ==================== 주문 API ====================
@@ -85,8 +89,14 @@ def _send_order(request_body):
     Returns:
         dict: API 응답 결과
     """
+    # API 키 동적 로드
+    access_key, secret_key = get_api_keys()
+    
+    if not access_key or not secret_key:
+        return {'error': 'API 키가 설정되지 않았습니다. 설정에서 API 키를 입력하세요.'}
+    
     # JWT 토큰 생성
-    authorization_token = get_param_jwt(ACCESS_KEY, SECRET_KEY, request_body)
+    authorization_token = get_param_jwt(access_key, secret_key, request_body)
     
     headers = {
         'Authorization': authorization_token,
@@ -120,7 +130,13 @@ def get_my_balance():
                 ...
             }, ...]
     """
-    authorization_token = get_param_jwt(ACCESS_KEY, SECRET_KEY, {})
+    # API 키 동적 로드
+    access_key, secret_key = get_api_keys()
+    
+    if not access_key or not secret_key:
+        return [{'error': 'API 키가 설정되지 않았습니다. 설정에서 API 키를 입력하세요.'}]
+    
+    authorization_token = get_param_jwt(access_key, secret_key, {})
     
     headers = {
         'Authorization': authorization_token,

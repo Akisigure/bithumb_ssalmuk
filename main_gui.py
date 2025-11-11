@@ -74,7 +74,11 @@ class TradingGUI:
                     f.write(f"ACCESS_KEY={access_key}\n")
                     f.write(f"SECRET_KEY={secret_key}\n")
                 
-                messagebox.showinfo("성공", "API 키가 저장되었습니다")
+                # 환경 변수 즉시 재로드
+                from dotenv import load_dotenv
+                load_dotenv(override=True)
+                
+                messagebox.showinfo("성공", "API 키가 저장되었습니다.\n프로그램 재시작 없이 바로 사용 가능합니다.")
                 dialog.destroy()
             except Exception as e:
                 messagebox.showerror("오류", f"저장 실패: {e}")
