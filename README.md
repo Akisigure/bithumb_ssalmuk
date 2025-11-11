@@ -1,6 +1,6 @@
 # Bithumb Trading Automation
 
-빗썸 거래소 API를 활용한 자동 매매 프로그램. GUI/CLI 인터페이스 지원 및 단일 실행 파일 배포.
+빗썸 API 연동 10만원 쌀먹이벤트용 어플리케이션
 
 ## Features
 
